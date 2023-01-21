@@ -1,0 +1,15 @@
+@import "../../styles/utils";
+
+.Notification {
+  padding: 16px;
+  color: $white-color;
+  background-color: $gray-color;
+
+  &.is-error {
+    background-color: $red-color;
+  }
+
+  &.is-success {
+    background-color: $green-color;
+  }
+}

@@ -1,0 +1,11 @@
+@import "../../styles/utils";
+
+.HomePage {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+
+  @include onTablet {
+    gap: 80px;
+  }
+}

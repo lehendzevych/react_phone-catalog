@@ -1,0 +1,16 @@
+@import "../../styles/utils";
+
+.FavoritesPage {
+  &__title {
+    margin: 0 0 8px;
+  }
+
+  &__total {
+    display: inline-block;
+    margin-bottom: 40px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: $gray-secondary-color;
+  }
+}

@@ -1,0 +1,123 @@
+@import "../../../../styles/utils";
+
+.CartItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @include onSmartphone {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__product {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__delete {
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    background-color: $white-color;
+    border: 0;
+    cursor: pointer;
+
+    &-svg {
+      & path {
+        fill: $gray-icons-color;
+        @include transition;
+      }
+
+      &:hover path {
+        fill: $gray-color;
+      }
+    }
+  }
+
+  &__title {
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: $gray-color;
+    text-decoration: none;
+
+    @include onSmartphone {
+      max-width: 148px;
+    }
+
+    @include onTablet {
+      max-width: 226px;
+    }
+
+    @include onDesktop {
+      max-width: 295px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__image {
+    width: 80px;
+    height: 80px;
+    padding: 7px;
+  }
+
+  &__counter {
+    position: absolute;
+    left: 24px;
+    display: flex;
+    align-items: center;
+
+    @include onSmartphone {
+      left: unset;
+      right: 144px;
+    }
+  }
+
+  &__button {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__choise {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 42px;
+
+    @include onSmartphone {
+      flex-direction: row;
+    }
+  }
+
+  &__count {
+    width: 32px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    color: $black-color;
+  }
+
+  &__price {
+    margin-right: 16px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 140%;
+    color: $gray-color;
+  }
+
+  &__hr {
+    margin: 24px 0;
+
+    @include onSmartphone {
+      display: none;
+    }
+  }
+}

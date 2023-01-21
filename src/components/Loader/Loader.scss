@@ -1,0 +1,44 @@
+@import "../../styles/utils";
+
+.Loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  
+  &__spinner {
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+    margin: 1em auto;
+    border: 0.5em solid $gray-elements-color;
+    border-left-color: $gray-color;
+    animation: load8 1.2s infinite linear;
+  }
+
+  &__text {
+    margin-top: 8px;
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 11px;
+    letter-spacing: 0.04em;
+    color: $gray-color;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

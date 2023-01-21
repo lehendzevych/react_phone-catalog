@@ -1,0 +1,14 @@
+.container {
+  box-sizing: content-box;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1136px;
+
+  @include onSmartphone {
+    padding: 0 30px;
+  }
+
+  @include onTablet {
+    padding: 0 30px;
+  }
+}

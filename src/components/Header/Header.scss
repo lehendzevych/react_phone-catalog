@@ -1,0 +1,128 @@
+@import "../../styles/utils";
+
+.Header {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  height: $header-height;
+  background-color: $white-color;
+  box-shadow: 0 1px 0 $gray-elements-color;
+  z-index: 15;
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include onTablet {
+      position: static;
+      margin: 0 64px 0 24px;
+      transform: translateX(0);
+    }
+  }
+
+  &__link {
+    padding: calc((#{$header-height} - 18px) / 2) 0;
+
+    &.is-active {
+      position: relative;
+      color: $gray-color;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: $gray-color;
+      }
+    }
+  }
+
+  &__button {
+    position: relative;
+    width: $header-height;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    cursor: pointer;
+    @include transition;
+
+    &:hover {
+      background-color: $gray-bg-color;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      box-shadow: -1px 0 0 $gray-elements-color;
+    }
+  }
+
+  &__burger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: $header-height;
+    height: 100%;
+    border: 0;
+    background-color: $white-color;
+    box-shadow: 0 0 0 1px $gray-elements-color;
+    cursor: pointer;
+    @include transition;
+
+    @include onTablet {
+      display: none;
+    }
+
+    &:hover {
+      background-color: $gray-bg-color;
+    }
+  }
+
+  &__burger-svg {
+    & path {
+      @include transition;
+      transform: translate(0, 0) rotate(0);
+    }
+
+    &.is-active path:nth-child(1) {
+      transform: translate(-6px, 9px) rotate(-37deg);
+    }
+
+    &.is-active path:nth-child(3) {
+      transform: translate(3px, -6px) rotate(37deg);
+    }
+  }
+
+  &__nav {
+    display: none;
+
+    @include onTablet {
+      display: block;
+    }
+  }
+
+  &__cartButton {
+    display: none;
+
+    @include onTablet {
+      display: flex;
+    }
+  }
+}

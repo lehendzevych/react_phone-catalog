@@ -1,0 +1,115 @@
+@import "../../styles/utils";
+
+.ProductPage {
+  &__title {
+    margin-bottom: 0;
+
+    @include onTablet {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__content {
+    position: relative;
+    display: block;
+
+    @include onSmartphone {
+      display: grid;
+      grid-template-columns: repeat(24, 1fr);
+      column-gap: 16px;
+    }
+  }
+
+  &__id {
+    display: block;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-icons-color;
+    margin-bottom: 24px;
+
+    @include onSmartphone {
+      grid-column: 1 / 25;
+    }
+
+    @include onTablet {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-bottom: 0;
+      text-align: right;
+    }
+  }
+
+  &__slider {
+    margin-bottom: 60px;
+
+    @include onSmartphone {
+      grid-column: 1 / 15;
+    }
+
+    @include onTablet {
+      margin-bottom: 80px;
+      grid-column: 1 / 13;
+    }
+  }
+
+  &__choice {
+    margin-bottom: 60px;
+
+    @include onSmartphone {
+      margin-bottom: 0;
+      grid-column: 16 / 25;
+    }
+
+    @include onTablet {
+      grid-column: 14 / 21;
+    }
+  }
+
+  &__about {
+    margin-bottom: 60px;
+
+    @include onSmartphone {
+      grid-column: 1 / 25;
+    }
+
+    @include onTablet {
+      margin-bottom: 80px;
+      grid-column: 1 / 13;
+    }
+  }
+
+  &__techSpecs {
+    margin-bottom: 80px;
+
+    @include onSmartphone {
+      grid-column: 1 / 25;
+    }
+
+    @include onTablet {
+      grid-column: 14 / 25;
+    }
+  }
+
+  &__techParam {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__techParam-name {
+    width: 50%;
+    text-align: left;
+  }
+
+  &__techParam-value {
+    width: 50%;
+    text-align: right;
+    color: $gray-color;
+  }
+}

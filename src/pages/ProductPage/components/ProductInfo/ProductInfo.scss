@@ -1,0 +1,18 @@
+@import "../../../../styles/utils";
+
+.ProductInfo {
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  &__hr {
+    margin-bottom: 32px;
+  }
+
+  &__content {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: $gray-secondary-color;
+  }
+}

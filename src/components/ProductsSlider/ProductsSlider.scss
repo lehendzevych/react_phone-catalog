@@ -1,0 +1,44 @@
+@import "../../styles/utils";
+
+.ProductsSlider {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__body {
+    overflow: hidden;
+  }
+
+  &__list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    @include transition;
+  }
+
+  &__item {
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -0.01em;
+    color: $gray-color;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__button {
+    @include square(32px);
+  }
+}

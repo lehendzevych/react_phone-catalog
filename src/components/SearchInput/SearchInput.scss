@@ -1,0 +1,168 @@
+@import "../../styles/utils";
+
+$input-padding: 24px;
+
+.SearchInput {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+
+  @include onTablet {
+    position: absolute;
+    top: 0;
+    right: 129px;
+  }
+
+  @include onDesktop {
+    position: static;
+    width: max-content;
+  }
+
+  &__content {
+    position: relative;
+    width: 64px;
+    height: 100%;
+    box-shadow: -1px 1px 0 $gray-elements-color;
+
+    @include onDesktop {
+      width: 100%;
+    }
+  }
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: 50% 0;
+    @include transition;
+
+    @include onDesktop {
+      transform: none;
+    }
+  }
+
+  &__input {
+    padding: 0 86px 0 $input-padding;
+    width: 100%;
+    height: 100%;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    color: $gray-color;
+    border: 0;
+    outline: none;
+    @include transition;
+
+    @include onDesktop {
+      display: block;
+      width: 327px;
+      transform: none;
+    }
+
+    &:hover {
+      background-color: $gray-bg-color;
+    }
+
+    &:focus {
+      border: 0;
+      background-color: $gray-bg-color;
+    }
+
+    &::placeholder {
+      color: $gray-icons-color;
+    }
+  }
+
+  &__icon-search {
+    position: absolute;
+    top: 50%;
+    right: $input-padding;
+
+    display: none;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+
+    @include onDesktop {
+      display: block;
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    top: 50%;
+    right: $input-padding;
+    transform: translateY(-50%);
+
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  &__mobile-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 64px;
+    height: 64px;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+
+    @include onDesktop {
+      display: none;
+    }
+
+    &:hover {
+      background-color: $gray-bg-color;
+    }
+  }
+
+  &__loader {
+    position: absolute;
+    top: 24px;
+    right: 58px;
+    transform: translateY(-50%);
+
+    display: block;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    border: 0.2em solid $gray-elements-color;
+    border-left-color: $gray-color;
+    animation: load8 1.2s infinite linear;
+  }
+
+  &.is-active {
+    left: 65px;
+  
+    @include onTablet {
+      left: 88px;
+    }
+    
+    .SearchInput__content {
+      width: 100%;
+    }
+    .SearchInput__wrapper {
+      transform: scaleX(100%);
+    }
+  }
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

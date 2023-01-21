@@ -1,0 +1,26 @@
+@mixin square($width) {
+  width: $width;
+  height: $width;
+}
+
+@mixin transition {
+  transition: all 0.3s linear;
+}
+
+@mixin onSmartphone {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin onTablet {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin onDesktop {
+  @media (min-width: 1193px) {
+    @content;
+  }
+}

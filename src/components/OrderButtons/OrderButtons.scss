@@ -1,0 +1,15 @@
+.OrderButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+
+  &__cart {
+    width: 100%;
+    height: 100%;
+  }
+  
+  &__like {
+    flex-shrink: 0;
+    height: 100%;
+  }
+}

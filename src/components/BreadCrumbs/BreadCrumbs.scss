@@ -1,0 +1,40 @@
+@import "../../styles/utils";
+
+.BreadCrumbs {
+  margin: -8px 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include onTablet {
+    margin: -16px 0 40px;
+  }
+
+  &__link {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__icon {
+    @include square(16px);
+    text-decoration: none;
+  }
+
+  &__arrow-right * {
+    fill: $gray-icons-color;
+  }
+
+  &__text {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-secondary-color;
+  }
+}

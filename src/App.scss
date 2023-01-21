@@ -1,1 +1,17 @@
-// not empty
+@import "./styles/utils";
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__main {
+    position: relative;
+    padding: 28px 0 56px;
+    flex: 1 0 auto;
+
+    @include onTablet {
+      padding: 40px 0 80px;
+    }
+  }
+}

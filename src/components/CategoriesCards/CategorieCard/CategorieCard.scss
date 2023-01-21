@@ -1,0 +1,44 @@
+@import "../../../styles/utils";
+
+.CategorieCard {
+  &__imageContainer {
+    position: relative;
+    margin-bottom: 24px;
+    padding-bottom: 100%;
+    background-color: $gray-elements-color;
+    overflow: hidden;
+  }
+
+  &__image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    @include transition;
+
+    @include onDesktop {
+      height: auto;
+    }
+  }
+
+  &__link {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    color: $gray-color;
+    text-decoration: none;
+
+    &:hover .CategorieCard__image {
+      transform: scale(1.1);
+    }
+  }
+
+  &__count {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: $gray-secondary-color;
+  }
+}

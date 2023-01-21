@@ -1,0 +1,102 @@
+@import "../../styles/utils";
+
+.Footer {
+  flex: 0 0 auto;
+  height: 132px;
+  background-color: $white-color;
+  box-shadow: 0 -1px 0 $gray-elements-color;
+
+  @include onSmartphone {
+    height: 96px;
+  }
+
+  &__container {
+    position: relative;
+    height: 100%;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include onSmartphone {
+      height: 100%;
+    }
+  }
+
+  &__list {
+    margin: 0 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 64px;
+    height: 64px;
+    padding: 0;
+    list-style: none;
+
+    @include onSmartphone {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      justify-content: center;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__link {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $gray-secondary-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $gray-color;
+      @include transition;
+    }
+  }
+
+  &__topLink {
+    padding: 0;
+    border: 0;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-family: "Mont", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    background-color: $white-color;
+    color: $gray-secondary-color;
+    @include transition;
+    cursor: pointer;
+
+    &:hover {
+      color: $gray-color;
+    }
+
+    &:hover .button {
+      border: 1px solid $gray-color;
+    }
+  }
+
+  &__topLink-text {
+    @include onSmartphone {
+      display: none;
+    }
+
+    @include onTablet {
+      display: inline-block;
+    }
+  }
+
+  &__topLink-button {
+    width: 32px;
+    height: 32px;
+  }
+}
