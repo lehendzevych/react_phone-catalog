@@ -31,7 +31,8 @@
 
   &__link {
     height: 100%;
-    padding: calc((#{$header-height} - 18px) / 2) 0;
+    display: flex;
+    align-items: center;
 
     &.is-active {
       position: relative;
