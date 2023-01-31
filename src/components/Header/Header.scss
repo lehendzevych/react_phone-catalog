@@ -30,6 +30,7 @@
   }
 
   &__link {
+    height: 100%;
     padding: calc((#{$header-height} - 18px) / 2) 0;
 
     &.is-active {
@@ -112,6 +113,7 @@
 
   &__nav {
     display: none;
+    height: 100%;
 
     @include onTablet {
       display: block;
