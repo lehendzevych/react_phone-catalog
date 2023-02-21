@@ -16,8 +16,6 @@ export const FavoritesPage = () => {
   const { favorites } = useAppSelector(state => state.favorites);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     setProducts(favorites);
   }, [products]);
 

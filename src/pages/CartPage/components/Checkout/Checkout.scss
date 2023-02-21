@@ -3,6 +3,9 @@
 .Checkout {
   height: max-content;
   text-align: center;
+  padding: 24px;
+  background-color: $white-color;
+  border: 1px solid $gray-elements-color;
 
   @include onTablet {
     width: 300px;

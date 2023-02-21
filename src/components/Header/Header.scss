@@ -29,37 +29,77 @@
     }
   }
 
-  &__link {
+  &__nav {
+    display: none;
+    height: 100%;
+
+    @include onTablet {
+      display: block;
+    }
+  }
+
+  &__menu {
+    margin: 0;
+    padding: 0;
     height: 100%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+  
+    @include onTablet {
+      gap: 64px;
+      flex-direction: row;
+    }
+  
+    &-link {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 11px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: $gray-secondary-color;
+      @include transition;
 
-    &.is-active {
-      position: relative;
-      color: $gray-color;
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background-color: $gray-color;
+      &--active {
+        position: relative;
+        color: $gray-color;
+  
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background-color: $gray-color;
+        }
+      }
+  
+      &:hover {
+        color: $gray-color;
       }
     }
   }
 
   &__button {
+    display: none;
     position: relative;
     width: $header-height;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border: 0;
     cursor: pointer;
     @include transition;
+
+    @include onTablet {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     &:hover {
       background-color: $gray-bg-color;
@@ -103,29 +143,12 @@
       transform: translate(0, 0) rotate(0);
     }
 
-    &.is-active path:nth-child(1) {
+    &--active path:nth-child(1) {
       transform: translate(-6px, 9px) rotate(-37deg);
     }
 
-    &.is-active path:nth-child(3) {
+    &--active path:nth-child(3) {
       transform: translate(3px, -6px) rotate(37deg);
-    }
-  }
-
-  &__nav {
-    display: none;
-    height: 100%;
-
-    @include onTablet {
-      display: block;
-    }
-  }
-
-  &__cartButton {
-    display: none;
-
-    @include onTablet {
-      display: flex;
     }
   }
 }

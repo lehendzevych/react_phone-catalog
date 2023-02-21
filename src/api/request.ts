@@ -1,14 +1,11 @@
-// eslint-disable-next-line max-len
 const BASE_URL = './api/products';
 
-async function wait(delay: number) {
-  return new Promise(resolve => {
-    setTimeout(resolve, delay);
-  });
-}
+const wait = (delay: number) => new Promise(resolve => {
+  setTimeout(resolve, delay);
+});
 
-export const request = (url: string) => {
-  return wait(600)
+export const request = async (url: string) => {
+  return wait(500)
     .then(() => fetch(BASE_URL + url))
     .then(response => {
       if (!response.ok) {

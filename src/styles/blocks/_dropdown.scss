@@ -61,18 +61,18 @@
     text-decoration: none;
     @include transition;
 
-    &:hover {
-      color: $gray-color;
-      background-color: $gray-bg-color;
-    }
-
-    &.is-active {
+    &--active {
       color: $gray-color;
       background-color: $gray-white;
     }
+
+    &:hover:not(&--active) {
+      color: $gray-color;
+      background-color: $gray-bg-color;
+    }
   }
 
-  &.is-active {
+  &--active {
     .dropdown__menu {
       transform: none;
     }

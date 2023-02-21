@@ -3,13 +3,10 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { Slider } from '../../class/Slider';
 
-import {
-  ReactComponent as IconArrowLeft,
-} from '../../../../icons/arrow_left.svg';
-import {
-  ReactComponent as IconArrowRight,
-} from '../../../../icons/arrow_right.svg';
+import { ReactComponent as IconArrowLeft } from '../../icons/arrow_left.svg';
+import { ReactComponent as IconArrowRight } from '../../icons/arrow_right.svg';
 
 import './ImagesSlider.scss';
 
@@ -22,50 +19,35 @@ type Props = {
 };
 
 export const ImagesSlider: FC<Props> = ({ images }) => {
-  const [imageIndex, setImageIndex] = useState(0);
   const [imageWidth, setImageWidth] = useState(0);
-  const [scroll, setScroll] = useState(0);
   const imageContainer = useRef<HTMLDivElement>(null);
+  const [slider, setSlider] = useState(
+    new Slider(images.length - 1, 0, 0, 1, true),
+  );
 
-  const nextSlide = () => {
-    if (images.length - 1 === imageIndex) {
-      setImageIndex(0);
-    } else {
-      setImageIndex(current => current + 1);
+  const prevSlide = () => setSlider(slider.prevSlide());
+  const nextSlide = () => setSlider(slider.nextSlide());
+  const setSlide = (index: number) => setSlider(slider.setIndex(index));
+
+  const handleResize = () => {
+    if (imageContainer.current) {
+      setImageWidth(imageContainer.current.clientWidth);
     }
-  };
-
-  const prevSlide = () => {
-    if (imageIndex === 0) {
-      setImageIndex(images.length - 1);
-    } else {
-      setImageIndex(current => current - 1);
-    }
-  };
-
-  const onScroll = () => {
-    setScroll(imageIndex * imageWidth);
   };
 
   useEffect(() => {
-    const handleImageWidth = () => {
-      if (imageContainer.current) {
-        setImageWidth(imageContainer.current.clientWidth);
-      }
-    };
+    handleResize();
 
-    handleImageWidth();
-
-    window.addEventListener('resize', handleImageWidth);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleImageWidth);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   useEffect(() => {
-    onScroll();
-  }, [imageIndex, imageWidth]);
+    slider.containerWidth = imageWidth;
+  }, [imageWidth]);
 
   useEffect(() => {
     const timerId = setTimeout(nextSlide, 5000);
@@ -73,7 +55,7 @@ export const ImagesSlider: FC<Props> = ({ images }) => {
     return () => {
       clearTimeout(timerId);
     };
-  }, [imageIndex]);
+  }, [slider.index]);
 
   return (
     <div className="ImagesSlider">
@@ -89,7 +71,7 @@ export const ImagesSlider: FC<Props> = ({ images }) => {
         <div className="ImagesSlider__imageContainer" ref={imageContainer}>
           <ul
             className="ImagesSlider__list"
-            style={{ transform: `translateX(-${scroll}px)` }}
+            style={{ transform: `translateX(-${slider.scrollTo}px)` }}
           >
             {images.map(image => (
               <li className="ImagesSlider__item" key={image.src}>
@@ -131,9 +113,9 @@ export const ImagesSlider: FC<Props> = ({ images }) => {
             title={image.alt}
             className={classNames(
               'ImagesSlider__dot',
-              { 'is-active': imageIndex === i },
+              { 'ImagesSlider__dot--active': slider.index === i },
             )}
-            onClick={() => setImageIndex(i)}
+            onClick={() => setSlide(i)}
           />
         ))}
       </div>

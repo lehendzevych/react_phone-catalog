@@ -1,4 +1,4 @@
-@import "../../../../styles/utils/";
+@import "../../styles/utils/";
 
 .ImagesSlider {
   &__content {
@@ -59,7 +59,7 @@
     cursor: pointer;
     @include transition;
 
-    &.is-active {
+    &--active {
       background-color: $gray-color;
     }
   }

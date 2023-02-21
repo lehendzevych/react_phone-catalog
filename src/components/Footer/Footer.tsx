@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ReactComponent as IconArrowUp } from '../../icons/arrow_up.svg';
-import { ReactComponent as StoreLogo } from '../../svg/logo.svg';
+import { ReactComponent as StoreLogo } from '../../icons/logo.svg';
 
 import './Footer.scss';
 

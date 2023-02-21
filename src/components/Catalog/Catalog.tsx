@@ -56,10 +56,8 @@ export const Catalog: FC<Props> = ({ products }) => {
   });
 
   useEffect(() => {
-    return () => {
-      window.scrollTo(0, 0);
-    };
-  }, [page]);
+    window.scrollTo(0, 0);
+  }, [page, perPage, sortBy, query]);
 
   return (
     <div className="Catalog">

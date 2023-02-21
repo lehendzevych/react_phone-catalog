@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getProducts } from '../../api/getProducts';
 import { Product } from '../../types/Product';
+import { getTablets } from '../../api/getTablets';
 
 import { BreadCrumbs } from '../../components/BreadCrumbs';
 import { Notification } from '../../components/Notification';
@@ -15,27 +15,16 @@ export const TabletsPage = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [responseError, setResponseError] = useState(false);
 
-  const getTabletsFromApi = async () => {
-    try {
-      const tabletsFromApi = [...await getProducts()]
-        .filter(product => product.type === 'tablet');
-
-      setTablets(tabletsFromApi);
-      setIsInitialized(true);
-    } catch {
-      setResponseError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    window.scrollTo(0, 0);
     setIsLoading(true);
-    setResponseError(false);
-    setIsInitialized(false);
 
-    getTabletsFromApi();
+    getTablets()
+      .then((data) => {
+        setTablets(data);
+        setIsInitialized(true);
+      })
+      .catch(() => setResponseError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (

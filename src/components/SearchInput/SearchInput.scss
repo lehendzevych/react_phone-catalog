@@ -24,6 +24,7 @@ $input-padding: 24px;
     width: 64px;
     height: 100%;
     box-shadow: -1px 1px 0 $gray-elements-color;
+    overflow: hidden;
 
     @include onDesktop {
       width: 100%;
@@ -142,7 +143,7 @@ $input-padding: 24px;
     animation: load8 1.2s infinite linear;
   }
 
-  &.is-active {
+  &--active {
     left: 65px;
   
     @include onTablet {

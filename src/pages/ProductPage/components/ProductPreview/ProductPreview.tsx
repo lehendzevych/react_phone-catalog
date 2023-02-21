@@ -1,5 +1,7 @@
 import classNames from 'classnames';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
+import { Slider } from '../../../../class/Slider';
+
 import {
   ReactComponent as IconArrowDown,
 } from '../../../../icons/arrow_down.svg';
@@ -13,22 +15,16 @@ type Props = {
 
 export const ProductPreview: FC<Props> = ({ images }) => {
   const [selectedImg, setSelectedImg] = useState(0);
-  const [index, setIndex] = useState(0);
-  const [scroll, setScroll] = useState(0);
   const gap = 16;
+  const itemsOnPage = 5;
   const itemHeight = 80;
+  const containerWidth = (itemHeight * itemsOnPage) + (gap * (itemsOnPage - 1));
+  const [slider, setSlider] = useState(
+    new Slider(images.length, gap, containerWidth, itemsOnPage),
+  );
 
-  const nextSlide = () => {
-    setIndex(current => current + 1);
-  };
-
-  const prevSlide = () => {
-    setIndex(current => current - 1);
-  };
-
-  const onScroll = () => {
-    setScroll(index * (itemHeight + gap));
-  };
+  const prevSlide = () => setSlider(slider.prevSlide());
+  const nextSlide = () => setSlider(slider.nextSlide());
 
   const onSelectImage = (e: React.MouseEvent, i: number): void => {
     e.preventDefault();
@@ -36,17 +32,13 @@ export const ProductPreview: FC<Props> = ({ images }) => {
     setSelectedImg(i);
   };
 
-  useEffect(() => {
-    onScroll();
-  }, [index]);
-
   return (
     <div className="ProductPreview">
       <div className="ProductPreview__slides">
         <ul
           className="ProductPreview__slidesList"
           style={{
-            transform: `translateY(-${scroll}px)`,
+            transform: `translateY(-${slider.scrollTo}px)`,
           }}
         >
           {images.map((img, i) => (
@@ -76,7 +68,7 @@ export const ProductPreview: FC<Props> = ({ images }) => {
             type="button"
             className="ProductPreview__button"
             onClick={prevSlide}
-            disabled={index === 0}
+            disabled={slider.index === 0}
           >
             <IconArrowUp className="ProductPreview__arrow" />
           </button>
@@ -85,7 +77,7 @@ export const ProductPreview: FC<Props> = ({ images }) => {
             type="button"
             className="ProductPreview__button"
             onClick={nextSlide}
-            disabled={index + 5 === images.length}
+            disabled={slider.index + itemsOnPage === images.length}
           >
             <IconArrowDown className="ProductPreview__arrow" />
           </button>

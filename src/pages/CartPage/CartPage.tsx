@@ -28,7 +28,7 @@ export const CartPage = () => {
         <div className="CartPage__content">
           <ul className="CartPage__list">
             {cartProducts.map(item => (
-              <li className="CartPage__item box" key={item.product.id}>
+              <li className="CartPage__item" key={item.product.id}>
                 <CartItem item={item} />
               </li>
             ))}

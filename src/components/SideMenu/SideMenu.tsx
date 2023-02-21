@@ -10,42 +10,40 @@ import './SideMenu.scss';
 
 type Props = {
   links: { to: string, text: string }[];
-  isOpen: boolean;
-  onClose: (bool: boolean) => void;
+  menuVisible: boolean;
+  setMenuVisible: (bool: boolean) => void;
 };
 
-export const SideMenu: FC<Props> = ({ links, isOpen, onClose }) => {
+export const SideMenu: FC<Props> = ({ links, menuVisible, setMenuVisible }) => {
   const { cartProducts } = useAppSelector(state => state.cartProducts);
   const { favorites } = useAppSelector(state => state.favorites);
 
+  const closeMenu = () => setMenuVisible(false);
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('SideMenu__body');
-    } else {
-      document.body.classList.remove('SideMenu__body');
-    }
-  }, [isOpen]);
+    document.body.classList.toggle('SideMenu__body', menuVisible);
+  }, [menuVisible]);
 
   return (
-    <div
+    <aside
       className={classNames(
         'SideMenu',
-        { 'is-active': isOpen },
+        { 'SideMenu--active': menuVisible },
       )}
     >
-      <div className="SideMenu__menu">
+      <div className="SideMenu__wrapper">
         <div className="SideMenu__content">
           <nav className="SideMenu__nav">
-            <ul className="menu">
+            <ul className="SideMenu__menu">
               {links.map(link => (
-                <li className="menu__item" key={link.to}>
+                <li className="SideMenu__menu-item" key={link.to}>
                   <NavLink
                     to={link.to}
                     className={({ isActive }) => classNames(
-                      'SideMenu__link menu__link',
-                      { 'is-active': isActive },
+                      'SideMenu__menu-link',
+                      { 'SideMenu__menu-link--active': isActive },
                     )}
-                    onClick={() => onClose(false)}
+                    onClick={closeMenu}
                   >
                     {link.text}
                   </NavLink>
@@ -59,15 +57,15 @@ export const SideMenu: FC<Props> = ({ links, isOpen, onClose }) => {
               <hr />
             </div>
 
-            <ul className="menu">
-              <li className="menu__item">
+            <ul className="SideMenu__menu">
+              <li className="SideMenu__menu-item">
                 <NavLink
                   to="favorites"
                   className={({ isActive }) => classNames(
-                    'SideMenu__link menu__link',
-                    { 'is-active': isActive },
+                    'SideMenu__menu-link',
+                    { 'SideMenu__menu-link--active': isActive },
                   )}
-                  onClick={() => onClose(false)}
+                  onClick={closeMenu}
                 >
                   <div className="icon">
                     <IconLike />
@@ -81,14 +79,16 @@ export const SideMenu: FC<Props> = ({ links, isOpen, onClose }) => {
 
                   <span>Favorites</span>
                 </NavLink>
+              </li>
 
+              <li className="SideMenu__menu-item">
                 <NavLink
                   to="cart"
                   className={({ isActive }) => classNames(
-                    'SideMenu__link menu__link',
-                    { 'is-active': isActive },
+                    'SideMenu__menu-link',
+                    { 'SideMenu__menu-link--active': isActive },
                   )}
-                  onClick={() => onClose(false)}
+                  onClick={closeMenu}
                 >
                   <div className="icon">
                     <IconCart />
@@ -109,6 +109,6 @@ export const SideMenu: FC<Props> = ({ links, isOpen, onClose }) => {
       </div>
 
       <div className="SideMenu__bg" />
-    </div>
+    </aside>
   );
 };

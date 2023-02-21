@@ -21,16 +21,11 @@ export const ProductsSlider: FC<Props> = ({ title, products }) => {
   const [itemWidth, setItemWidth] = useState(0);
   const [listWidth, setListWidth] = useState(0);
   const [slider, setSlider] = useState(
-    new Slider(products.length, gap, 0, 0, false),
+    new Slider(products.length, gap, 0, 0),
   );
 
-  const nextSlide = () => {
-    setSlider(slider.setIndex(slider.index + 1));
-  };
-
-  const prevSlide = () => {
-    setSlider(slider.setIndex(slider.index - 1));
-  };
+  const prevSlide = () => setSlider(slider.prevSlide());
+  const nextSlide = () => setSlider(slider.nextSlide());
 
   const handleResize = () => {
     setBodyWidth(window.innerWidth);

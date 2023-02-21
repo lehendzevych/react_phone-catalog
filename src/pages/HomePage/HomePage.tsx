@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getProducts } from '../../api/getProducts';
 import { Product } from '../../types/Product';
+import { getProducts } from '../../api/getProducts';
 
 import { Notification } from '../../components/Notification';
 import { Loader } from '../../components/Loader';
-import { ImagesSlider } from './components/ImagesSlider';
+import { ImagesSlider } from '../../components/ImagesSlider';
 import { ProductsSlider } from '../../components/ProductsSlider';
 import { CategoriesCards } from '../../components/CategoriesCards';
 
@@ -20,26 +20,16 @@ export const HomePage = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [responseError, setResponseError] = useState(false);
 
-  const getProductsFromApi = async () => {
-    try {
-      const productsFromApi = await getProducts();
-
-      setProducts(productsFromApi);
-      setIsInitialized(true);
-    } catch {
-      setResponseError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    window.scrollTo(0, 0);
     setIsLoading(true);
-    setResponseError(false);
-    setIsInitialized(false);
 
-    getProductsFromApi();
+    getProducts()
+      .then((data) => {
+        setProducts(data);
+        setIsInitialized(true);
+      })
+      .catch(() => setResponseError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (

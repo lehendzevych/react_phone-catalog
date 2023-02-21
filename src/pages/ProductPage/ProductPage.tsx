@@ -46,39 +46,19 @@ export const ProductPage = () => {
     techSpecs = getTechSpecs(product);
   }
 
-  const productsLoad = async () => {
-    try {
-      const productsFromApi = await getProducts();
-
-      setProducts(productsFromApi);
-    } catch {
-      setResponseError(true);
-    }
-  };
-
-  const productDetailsLoad = async (id: string) => {
-    try {
-      const productDetailsFromApi = await getProductById(id);
-
-      setProduct(productDetailsFromApi);
-      setIsInitialized(true);
-    } catch {
-      setResponseError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    window.scrollTo(0, 0);
     setIsInitialized(false);
     setResponseError(false);
     setIsLoading(true);
 
-    if (productId) {
-      productsLoad();
-      productDetailsLoad(productId);
-    }
+    Promise.all([getProducts(), getProductById(productId)])
+      .then(([productsFromApi, productFromApi]) => {
+        setProducts(productsFromApi);
+        setProduct(productFromApi);
+        setIsInitialized(true);
+      })
+      .catch(() => setResponseError(true))
+      .finally(() => setIsLoading(false));
   }, [productId]);
 
   return (
@@ -146,7 +126,7 @@ export const ProductPage = () => {
           <section className="ProductPage__suggestedProducts">
             <ProductsSlider
               title="You may also like"
-              products={getSuggestedProducts(products)}
+              products={getSuggestedProducts(products, productId)}
             />
           </section>
         </>

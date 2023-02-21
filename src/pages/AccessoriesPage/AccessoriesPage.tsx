@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getProducts } from '../../api/getProducts';
 import { Product } from '../../types/Product';
+import { getAccessories } from '../../api/getAccessories';
 
 import { BreadCrumbs } from '../../components/BreadCrumbs';
 import { Notification } from '../../components/Notification';
@@ -15,27 +15,16 @@ export const AccessoriesPage = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [responseError, setResponseError] = useState(false);
 
-  const getAccessoriesFromApi = async () => {
-    try {
-      const accessoriesFromApi = [...await getProducts()]
-        .filter(product => product.type === 'accessory');
-
-      setAccessories(accessoriesFromApi);
-      setIsInitialized(true);
-    } catch {
-      setResponseError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    window.scrollTo(0, 0);
     setIsLoading(true);
-    setResponseError(false);
-    setIsInitialized(false);
 
-    getAccessoriesFromApi();
+    getAccessories()
+      .then((data) => {
+        setAccessories(data);
+        setIsInitialized(true);
+      })
+      .catch(() => setResponseError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (

@@ -1,17 +1,17 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
-import { NavLink, useLocation } from 'react-router-dom';
-import './Header.scss';
+
+import { useAppSelector } from '../../app/hooks';
 import { SideMenu } from '../SideMenu';
 import { SearchInput } from '../SearchInput';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import * as cartProductActions from '../../app/features/cartProductsSlice';
-import * as favoritesActions from '../../app/features/favoritesSlice';
 
-import { ReactComponent as StoreLogo } from '../../svg/logo.svg';
+import { ReactComponent as StoreLogo } from '../../icons/logo.svg';
 import { ReactComponent as IconLike } from '../../icons/favourites.svg';
 import { ReactComponent as IconCart } from '../../icons/cart.svg';
 import { ReactComponent as IconBurger } from '../../icons/menu_burger.svg';
+
+import './Header.scss';
 
 const navLinks = [
   { to: '/', text: 'Home' },
@@ -21,10 +21,9 @@ const navLinks = [
 ];
 
 export const Header: FC = () => {
-  const [sideMenu, setSideMenu] = useState(false);
+  const [sideMenuVisible, setSideMenuVisible] = useState(false);
   const { cartProducts } = useAppSelector(state => state.cartProducts);
   const { favorites } = useAppSelector(state => state.favorites);
-  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const pathNames = pathname.slice(1).split('/');
   const currentPage = pathNames[0].toLocaleLowerCase();
@@ -32,58 +31,36 @@ export const Header: FC = () => {
   const searchVisible = searchVisibleOn.includes(currentPage)
     && pathNames.length === 1;
 
-  useEffect(() => {
-    const cartFromLocalStorage = localStorage.getItem('cart');
-
-    if (cartFromLocalStorage) {
-      dispatch(
-        cartProductActions.setCartProducts(
-          JSON.parse(cartFromLocalStorage),
-        ),
-      );
-    }
-
-    const favoritesFromLocalStorage = localStorage.getItem('favorites');
-
-    if (favoritesFromLocalStorage) {
-      dispatch(
-        favoritesActions.setFavorites(
-          JSON.parse(favoritesFromLocalStorage),
-        ),
-      );
-    }
-  }, []);
-
   return (
     <>
       <header className="Header">
         <button
           type="button"
           className="Header__burger"
-          onClick={() => setSideMenu(bool => !bool)}
+          onClick={() => setSideMenuVisible(bool => !bool)}
         >
           <IconBurger
             className={classNames(
               'Header__burger-svg',
-              { 'is-active': sideMenu },
+              { 'Header__burger-svg--active': sideMenuVisible },
             )}
           />
         </button>
 
         <div className="Header__container">
-          <NavLink to="/" className="Header__logo">
+          <Link to="/" className="Header__logo">
             <StoreLogo />
-          </NavLink>
+          </Link>
 
           <nav className="Header__nav">
-            <ul className="menu">
+            <ul className="Header__menu">
               {navLinks.map(link => (
-                <li className="menu__item" key={link.to}>
+                <li className="Header__menu-item" key={link.to}>
                   <NavLink
                     to={link.to}
                     className={({ isActive }) => classNames(
-                      'Header__link menu__link',
-                      { 'is-active': isActive },
+                      'Header__menu-link',
+                      { 'Header__menu-link--active': isActive },
                     )}
                   >
                     {link.text}
@@ -100,8 +77,8 @@ export const Header: FC = () => {
           <NavLink
             to="favorites"
             className={({ isActive }) => classNames(
-              'Header__link Header__button Header__cartButton',
-              { 'is-active': isActive },
+              'Header__link Header__button',
+              { 'Header__link--active': isActive },
             )}
           >
             <div className="icon">
@@ -118,8 +95,8 @@ export const Header: FC = () => {
           <NavLink
             to="cart"
             className={({ isActive }) => classNames(
-              'Header__link Header__button Header__cartButton',
-              { 'is-active': isActive },
+              'Header__link Header__button',
+              { 'Header__link--active': isActive },
             )}
           >
             <div className="icon">
@@ -137,8 +114,8 @@ export const Header: FC = () => {
 
       <SideMenu
         links={navLinks}
-        isOpen={sideMenu}
-        onClose={setSideMenu}
+        menuVisible={sideMenuVisible}
+        setMenuVisible={setSideMenuVisible}
       />
     </>
   );

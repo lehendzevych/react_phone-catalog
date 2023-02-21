@@ -35,7 +35,7 @@ ReactDOM.render(
             <Route path=":productId" element={<ProductPage />} />
           </Route>
 
-          <Route path="/" element={<HomePage />} />
+          <Route index element={<HomePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="*" element={<PageNotFound />} />

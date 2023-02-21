@@ -44,7 +44,7 @@ export const Checkout: FC<Props> = ({ cartProducts }) => {
   }, [checkoutClick]);
 
   return (
-    <div className="Checkout box">
+    <div className="Checkout">
       <span className="Checkout__price">{`$${totalSum()}`}</span>
 
       <span className="Checkout__total" data-cy="productQauntity">

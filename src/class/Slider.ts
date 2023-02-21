@@ -1,7 +1,13 @@
 export class Slider {
-  public index = 0;
+  constructor(
+    public length: number,
+    public gap: number,
+    public containerWidth: number,
+    public itemsOnPage: number,
+    public isInfynity?: boolean,
+  ) {}
 
-  public item = this.itemWidth;
+  public index = 0;
 
   get scrollTo() {
     return this.index * (this.itemWidth + this.gap);
@@ -12,19 +18,6 @@ export class Slider {
       ? this.containerWidth
       : (this.containerWidth
         - (this.gap * (this.itemsOnPage - 1))) / this.itemsOnPage;
-  }
-
-  constructor(
-    public length: number,
-    public gap: number,
-    public containerWidth: number,
-    public itemsOnPage: number,
-    public isInfynity: boolean,
-  ) {
-    this.gap = gap;
-    this.containerWidth = containerWidth;
-    this.itemsOnPage = itemsOnPage;
-    this.isInfynity = isInfynity;
   }
 
   private copySlider() {

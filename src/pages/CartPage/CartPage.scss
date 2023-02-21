@@ -30,6 +30,9 @@
 
   &__item {
     display: block;
+    padding: 24px;
+    background-color: $white-color;
+    border: 1px solid $gray-elements-color;
   }
 
   &__checkout {

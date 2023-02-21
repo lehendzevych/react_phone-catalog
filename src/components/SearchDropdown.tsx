@@ -41,7 +41,7 @@ export const SearchDropdown: FC<Props> = ({
     <div
       className={classNames(
         'dropdown',
-        { 'is-active': isActive },
+        { 'dropdown--active': isActive },
       )}
       ref={dropdown}
     >
@@ -71,7 +71,7 @@ export const SearchDropdown: FC<Props> = ({
               params={{ [param]: option.value, page: null }}
               className={classNames(
                 'dropdown__item',
-                { 'is-active': paramValue === option.value },
+                { 'dropdown__item--active': paramValue === option.value },
               )}
               onClick={() => setIsActive(current => !current)}
             >

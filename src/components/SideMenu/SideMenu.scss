@@ -18,6 +18,10 @@
 
   &__body {
     overflow: hidden;
+
+    @include onTablet {
+      overflow: visible;
+    }
   }
 
   &__bg {
@@ -29,7 +33,7 @@
     @include transition;
   }
 
-  &__menu {
+  &__wrapper {
     flex-shrink: 0;
     width: 200px;
     height: 100%;
@@ -46,20 +50,44 @@
     padding: 16px 0;
   }
 
-  &__link {
+  &__menu {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
 
-    &:hover {
-      color: $gray-color;
-      background-color: $gray-bg-color;
+    @include onTablet {
+      gap: 64px;
+      flex-direction: row;
     }
 
-    &.is-active {
-      color: $gray-color;
-      background-color: $gray-white;
+    &-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 11px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: $gray-secondary-color;
+      @include transition;
+
+      &--active {
+        color: $gray-color;
+        background-color: $gray-white;
+      }
+
+      &:hover:not(&--active) {
+        color: $gray-color;
+        background-color: $gray-bg-color;
+      }
     }
   }
 
@@ -69,7 +97,7 @@
     margin-bottom: 16px;
   }
 
-  &.is-active {
+  &--active {
     transform: translateX(0%);
 
     .SideMenu__bg {

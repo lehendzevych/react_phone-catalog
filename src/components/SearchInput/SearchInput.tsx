@@ -59,7 +59,7 @@ export const SearchInput = () => {
     <div
       className={classNames(
         'SearchInput',
-        { 'is-active': search },
+        { 'SearchInput--active': search },
       )}
     >
       <div className="SearchInput__content">
