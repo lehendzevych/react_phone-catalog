@@ -22,7 +22,7 @@ export const ImagesSlider: FC<Props> = ({ images }) => {
   const [imageWidth, setImageWidth] = useState(0);
   const imageContainer = useRef<HTMLDivElement>(null);
   const [slider, setSlider] = useState(
-    new Slider(images.length - 1, 0, 0, 1, true),
+    new Slider(images.length, 0, 0, 1, true),
   );
 
   const prevSlide = () => setSlider(slider.prevSlide());

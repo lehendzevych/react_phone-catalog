@@ -44,7 +44,7 @@ export class Slider {
 
   public nextSlide() {
     if (this.isInfynity) {
-      if (this.index !== this.length) {
+      if (this.index !== this.length - 1) {
         this.index += 1;
       } else {
         this.index = 0;
